@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Loan Default Predictor</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        @font-face {
+            font-family: 'Century Gothic';
+            src: url("{{ url_for('static', filename='font/CenturyGothic.ttf') }}") format('truetype');
+        }
+
+        body {
+            font-family: 'Century Gothic', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <h1>LOAN DEFAULT PREDICTOR</h1>
+        </header>
+        <main>
+            <div>
+                <form action="{{ url_for('main') }}" method="POST">
+
+                    <div class="row glass">
+                        <div class="col-md-6 col-lg-6 col-sm-12 ">
+                            <div class="mb-3">
+                                <h3>LOAN INFORMATION</h3>
+
+                                <label for="LoanAmount" class="form-label">Total Loan Amount</label>
+                                <input type="number" class="form-control" name="LoanAmount" id="LoanAmount"
+                                    aria-describedby="helpId" required>
+
+
+                                <label for="FundedAmount" class="form-label">Total Funded Amount</label>
+                                <input type="number" class="form-control" name="FundedAmount" id="FundedAmount"
+                                    aria-describedby="helpId" required>
+
+
+
+
+                                <label for="FundedAmountInvestor" class="form-label">Total Funded Amount by the
+                                    Investor</label>
+                                <input type="number" step="0.0001" class="form-control" name="FundedAmountInvestor"
+                                    id="FundedAmountInvestor" aria-describedby="helpId" required>
+                                <label for="Term" class="form-label">Term</label>
+                                <input type="number" class="form-control" name="Term" id="Term"
+                                    aria-describedby="helpId" required>
+                                <label class="form-label" for="w">Initial List Status</label>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required name="w" id="w" value="0">
+                                    <label class="form-check-label" for="w">
+                                        Whole
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required name="w" id="f" value="1">
+                                    <label class="form-check-label" for="f">
+                                        Fractional
+                                    </label>
+                                </div>
+                                <br>
+                                <hr>
+                                <h3>PAYMENT INFORMATION</h3>
+
+                                <label for="CollectionRecoveryFee" class="form-label">Collection Recovery Fee</label>
+                                <input type="number" step="0.0001" class="form-control" name="CollectionRecoveryFee"
+                                    id="CollectionRecoveryFee" required>
+
+                                <label for="TotalCurrentBalance" class="form-label">Total Current Balance</label>
+                                <input type="number" step="0.0001" class="form-control" name="TotalCurrentBalance"
+                                    id="TotalCurrentBalance" required>
+                                <label for="TotalReceivedInterest" class="form-label">Total Received Interest</label>
+                                <input type="number" step="0.0001" class="form-control" name="TotalReceivedInterest"
+                                    id="TotalReceivedInterest" required>
+
+                                <label for="Recoveries" class="form-label">Recoveries</label>
+                                <input type="number" step="0.0001" class="form-control" name="Recoveries"
+                                    id="Recoveries" required>
+
+
+
+                                <label for="TotalReceivedLateFee" class="form-label">Total Received Late Fee</label>
+                                <input type="number" step="0.0001" class="form-control" name="TotalReceivedLateFee"
+                                    id="TotalReceivedLateFee" required>
+                                <label class="form-label" for="med">Collection 12 months
+                                    medical</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required value="0" name="med"
+                                        id="med1">
+                                    <label class="form-check-label" for="med1">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required value="1" name="med"
+                                        id="med2">
+                                    <label class="form-check-label" for="med2">
+                                        No
+                                    </label>
+                                </div>
+
+                                <label for="TotalCollectionAmount" class="form-label">Total Collection Amount</label>
+                                <input type="number" step="0.0001" class="form-control" name="TotalCollectionAmount"
+                                    id="TotalCollectionAmount" required>
+                                <label for="TotalRevolvingCreditLimit" class="form-label">Total Revolving Credit</label>
+                                <input type="number" step="0.0001" class="form-control" name="TotalRevolvingCreditLimit"
+                                    id="TotalRevolvingCreditLimit" required>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 ">
+                            <div class="mb-3">
+                                <h3>BORROWER INFORMATION</h3>
+                                <label for="HomeOwnership" class="form-label">Home Ownership</label>
+                                <input type="number" step="0.0001" class="form-control" name="HomeOwnership"
+                                    id="HomeOwnership" required>
+                                <label for="VerificationStatus" class="form-label">Verification Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required value="0"
+                                        name="VerificationStatus" id="ver1">
+                                    <label class="form-check-label" for="ver1">
+                                        Not Verified
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required value="1"
+                                        name="VerificationStatus" id="ver2">
+                                    <label class="form-check-label" for="ver2">
+                                        Source Verified
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" required value="2"
+                                        name="VerificationStatus" id="ver3">
+                                    <label class="form-check-label" for="ver3">
+                                        Verified
+                                    </label>
+                                </div>
+
+                                <label for="DebtToIncomeRatio" class="form-label">Debt To Income Ratio</label>
+                                <input type="number" step="0.0001" class="form-control" name="DebtToIncomeRatio"
+                                    id="DebtToIncomeRatio" required max="100" min="0">
+
+                                <label for="DelinquenciesInLast2Years" class="form-label">Delinquencies In Last
+                                    2 Years</label>
+                                <input type="number" class="form-control" name="DelinquenciesInLast2Years"
+                                    id="DelinquenciesInLast2Years" required>
+
+
+
+                                <label for="PublicRecords" class="form-label">Public Records</label>
+                                <input type="number" class="form-control" name="PublicRecords" id="PublicRecords"
+                                    required>
+                                <label for="RevolvingBalance" class="form-label">Revolving Balance</label>
+                                <input type="number" class="form-control" name="RevolvingBalance" id="RevolvingBalance"
+                                    required>
+                                <label for="RevolvingUtilities" class="form-label">Revolving Utilities</label>
+                                <input type="number" step="0.0001" class="form-control" name="RevolvingUtilities"
+                                    id="RevolvingUtilities" required>
+
+                                <label class="form-label" for="ApplicationType">Application Type</label>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="joint">
+                                        Joint
+                                    </label>
+                                    <input class="form-check-input" type="radio" value="0" required
+                                        name="ApplicationType" id="joint">
+
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="individual">
+                                        Individual
+                                    </label>
+                                    <input class="form-check-input" type="radio" value="1" required
+                                        name="ApplicationType" id="individual">
+
+                                </div>
+                                <label for="LastWeekPay" class="form-label">Last Week Pay</label>
+                                <input type="number" step="0.0001" class="form-control" name="LastWeekPay"
+                                    id="LastWeekPay" required>
+
+
+
+
+
+                                <label for="OpenAccounts" class="form-label">Open Accounts</label>
+                                <input type="number" class="form-control" name="OpenAccounts" id="OpenAccounts"
+                                    required>
+                                <label for="InterestRate" class="form-label">Interest Rate</label>
+                                <input type="number" step="0.0001" class="form-control" name="InterestRate"
+                                    id="InterestRate" aria-describedby="helpId" min=0 max=100 required>
+                                <label for="TotalAccounts" class="form-label">Total Accounts</label>
+                                <input type="number" class="form-control" name="TotalAccounts" id="TotalAccounts"
+                                    required>
+                                <label for="InquiriesInLast6Months" class="form-label">Inquiries In Last 6
+                                    Months</label>
+                                <input type="number" class="form-control" name="InquiriesInLast6Months"
+                                    id="InquiriesInLast6Months" required>
+
+                                <label for="EmpDuration" class="form-label">Employment Duration</label>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="0" required name="EmpDuration"
+                                        id="emp1">
+                                    <label class="form-check-label" for="emp1">
+                                        Mortgage
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="1" required name="EmpDuration"
+                                        id="emp2">
+                                    <label class="form-check-label" for="emp2">
+                                        Rent
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="2" required name="EmpDuration"
+                                        id="emp3">
+                                    <label class="form-check-label" for="emp3">
+                                        Own
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+                        <button type="submit" class=" btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+        <footer>
+            <script src="vanilla-tilt.js"></script>
+        </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

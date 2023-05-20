@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    background-color: #040113;
+}
+
+body {
+    background-color: #1d1625;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+
+h1, h3 {
+
+    font-size: 50px;
+    background: -webkit-linear-gradient(-45deg, #ff008c, #00fffb, #00f2ff, #f700ff);
+    animation: gradient 10s ease infinite;
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.05em;
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+h1 {
+    text-align: center;
+    filter: blur(0);
+}
+
+h3 {
+    font-size: 25px;
+}
+
+.glass {
+    filter: blur(0);
+    margin: 10px;
+    padding: 50px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.137);
+    border-radius: 16px;
+    box-shadow: 0 40px 30px rgba(95, 80, 95, 0.24);
+}
+
+.form-control {
+    background-color: #1c1221;
+    border-radius: 0;
+    color: rgb(177, 246, 255);
+    border: 0 solid;
+    border-bottom: 2px solid rgb(177, 246, 255);
+
+}
+
+.InitialListStatus {
+    background-color: #ebe1f7ce;
+    border: 0 solid #d5fffe;
+    color: black;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-label {
+    color: rgb(2, 217, 255);
+    margin: 10px 0 10px 0;
+}
+
+.form-control:focus {
+    background-color: #1c12219f;
+    color: rgb(153, 237, 248);
+
+}
+
+.form-control:hover {
+    background-color: #51365f9f;
+    color: rgb(153, 237, 248);
+
+}
+
+label {
+    font-size: 20px;
+}
+
+.btn {
+    display: flex;
+    border: 0 solid;
+    width: 50%;
+}
+
+button {
+    background: -webkit-linear-gradient(-45deg, #bb1570, #cc0271, #cc0271, #cc0271);
+    animation: gradient 10s ease infinite;
+    background-size: 400% 400%;
+    border: 0 solid;
+    border-radius: 7px;
+    height: 40px;
+    margin: 10px auto;
+    padding: 5px;
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    width: 200px;
+}
+
+button:hover {
+    background: -webkit-linear-gradient(-45deg, #ff008c, #00fffb, #00f2ff, #f700ff);
+    animation: gradient 10s ease infinite;
+    background-size: 400% 400%;
+}
+
+/* KEY FRAMES */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.result {
+    margin-top: 100px;
+}
